@@ -6,35 +6,37 @@ text onto the client's clipboard. Here is what Clippy looks like on GitHub:
 
 ![Clippy in action](http://img.skitch.com/20090213-cjiawnwig8udf5a6qf1c45cne8.png)
 
-Here is a sample Rails (Ruby) helper that can be used to place Clippy on a
+Here is a sample HTML that can be used to place Clippy on a
 page:
 
-    def clippy(text, bgcolor='#FFFFFF')
-      html = <<-EOF
-        <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-                width="110"
-                height="14"
-                id="clippy" >
-        <param name="movie" value="/flash/clippy.swf"/>
-        <param name="allowScriptAccess" value="always" />
-        <param name="quality" value="high" />
-        <param name="scale" value="noscale" />
-        <param NAME="FlashVars" value="text=#{text}">
-        <param name="bgcolor" value="#{bgcolor}">
-        <embed src="/flash/clippy.swf"
-               width="110"
-               height="14"
-               name="clippy"
-               quality="high"
-               allowScriptAccess="always"
-               type="application/x-shockwave-flash"
-               pluginspage="http://www.macromedia.com/go/getflashplayer"
-               FlashVars="text=#{text}"
-               bgcolor="#{bgcolor}"
-        />
-        </object>
-      EOF
-    end
+    <script type="text/javascript">
+      function getKeyword() {
+        return document.getElementById("keyword").value;
+      }
+    </script>
+    <input id="keyword" type="text" />
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+            width="110"
+            height="14"
+            id="clippy">
+      <param name="movie" value="clippy.swf"/>
+      <param name="allowScriptAccess" value="always" />
+      <param name="quality" value="high" />
+      <param name="scale" value="noscale" />
+      <param NAME="FlashVars" value="call=getKeyword">
+      <param name="bgcolor" value="#ffffff">
+      <embed src="clippy.swf"
+             width="110"
+             height="14"
+             name="clippy"
+             quality="high"
+             allowScriptAccess="always"
+             type="application/x-shockwave-flash"
+             pluginspage="http://www.macromedia.com/go/getflashplayer"
+             FlashVars="call=getKeyword"
+             bgcolor="#ffffff"
+             />
+    </object>
 
 Installation (Pre-Built SWF)
 ---------------------------

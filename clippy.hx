@@ -4,12 +4,12 @@ import flash.display.SimpleButton;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
+import flash.external.ExternalInterface;
 
 class Clippy {
   // Main
   static function main() {
-    var text:String = flash.Lib.current.loaderInfo.parameters.text;
-    
+    var call:String = flash.Lib.current.loaderInfo.parameters.call;
     // label
     
     var label:TextField = new TextField();
@@ -34,7 +34,7 @@ class Clippy {
     button.hitTestState = flash.Lib.attach("button_down");
     
     button.addEventListener(MouseEvent.MOUSE_UP, function(e:MouseEvent) {
-      flash.system.System.setClipboard(text);
+      flash.system.System.setClipboard(ExternalInterface.call(call));
       label.text = "copied!";
       label.setTextFormat(format);
     });
