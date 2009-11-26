@@ -9,6 +9,7 @@ import flash.external.ExternalInterface;
 class Clippy {
   // Main
   static function main() {
+    var text:String = flash.Lib.current.loaderInfo.parameters.text;
     var call:String = flash.Lib.current.loaderInfo.parameters.call;
     // label
     
@@ -34,7 +35,11 @@ class Clippy {
     button.hitTestState = flash.Lib.attach("button_down");
     
     button.addEventListener(MouseEvent.MOUSE_UP, function(e:MouseEvent) {
-      flash.system.System.setClipboard(ExternalInterface.call(call));
+      if (call == null) {
+        flash.system.System.setClipboard(text);
+      } else {
+        flash.system.System.setClipboard(ExternalInterface.call(call));
+      }
       label.text = "copied!";
       label.setTextFormat(format);
     });
